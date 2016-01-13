@@ -22,11 +22,11 @@ OBJGROUP=			\
 		 $(HTTP)	
 		
 
-all:program
+all:httpserver
 
-program: $(OBJGROUP)
-	$(CC) -o program $(CFLAGS) $(OBJGROUP) 
+httpserver: $(OBJGROUP)
+	$(CC) -o httpserver $(CFLAGS) $(OBJGROUP) 
 
 clean:
 	rm */*.o
-	rm program
+	rm httpserver

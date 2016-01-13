@@ -18,7 +18,7 @@
 #define MAX_REQUEST_BODY_LENGTH (1024 * 1024)
 #define MAX_BACKLOG 5
 #define DEFAULT_PORT "80"
-#define USAGE "Usage: %s [--port=n] [chroot --user=u --group=g] [--debug] <docroot>\n"
+#define USAGE "Usage: %s [--port=n] [--debug] <docroot>\n"
 
 static int debug_mode = 0;
 
@@ -26,9 +26,6 @@ static int debug_mode = 0;
 static struct option longopts[] =
 {
 	{"debug", no_argument,		&debug_mode,1},
-	{"chroot", no_argument, 	NULL, 'c'},
-	{"user", required_argument, NULL, 'u'},
-	{"group", required_argument, NULL, 'g'},
 	{"port", required_argument, NULL, 'p'},
 	{"help", no_argument, 		NULL, 'h'},
 	{0, 0, 0, 0}
@@ -42,8 +39,6 @@ int main(
 	int server = 0; //listen用socket
 	char *port = NULL;
 	char *docroot;
-	char *user = NULL;
-	char *group = NULL;
 	int opt;
 
 	while ((opt = getopt_long(argc, argv, "", longopts, NULL)) != -1)
@@ -56,12 +51,6 @@ int main(
 			case 'c':
 				break;
 
-			case 'u':
-				user = optarg;
-				break;
-			case 'g':
-				group = optarg;
-				break;
 			case 'p':
 				port = optarg;
 				break;
